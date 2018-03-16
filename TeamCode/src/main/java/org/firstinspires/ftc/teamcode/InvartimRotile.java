@@ -89,10 +89,8 @@ public class InvartimRotile extends LinearOpMode {
             else brat.setPower(0);
 
 
-
-
             if(gamepad2.dpad_up) {
-                targetPos = motor.getCurrentPosition() - 1000;
+                targetPos = motor.getCurrentPosition() + 1000;
                 motor.setTargetPosition(-targetPos);
                 motor.setPower(1);
                 while (motor.isBusy() && opModeIsActive()) {
