@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\28eee2b2e56435095456416227b7113107b319a1\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8067b48db34001e247fa000f2833a85c18602eb4">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_9de8b254a937964b0e63772086d7bc401edd96e2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\FtcRobotController\build\intermediates\bundles\default\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="36f5ef793d879dc86f4e4a3f969dc2d40ca658f5">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_5c0a883cca21678b83e122c23a03155c9b3d3b9f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\343d409cdf0892d2b41ad91862a8632557b5e158\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="0afd6a8e22ccd6505d194cc3872cdc9804785f0f">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_6d1c3c3265239d73cb2f559926aea0d2f78acb82.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\6563e63562fd90e90a1e1d01be91ea76acc940a2\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a336efc08e0013b3912c24180e78bdb9399effdf">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_46d2c80f333c361c2bb3c006e0654dc30d35afb8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\d4546ea9496dfc8b9b243a36820eb239f0657bd2\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="7cd44f3e9b0804d848acff8c77b242d8530c6b17">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_fc88d1366d85d194e63d8fea173ad8e98f8f688c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\9f9c4dc7a3d9b23beff1e6399955898a923e2760\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9403be210676ed196cdcc64c7391b9ae2361c174">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_0e59b32806761e94fbba4ec891e3333af0a4420b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\output\jars\libs\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="5a214d3b1b12e72f4fb0d5d5d8d0ec43c96de2b5">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\support-annotations-23.4.0_e0600a1b10e7a90fba919a2b42f561a5f9476c40.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\31410e3cea335c2cc8c8310792af1c07162d8cd2\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9dafed45e330aec14abcce05bdb7bbdb2a2d7092">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_1874f8be37d6fc5f5abbb29391828793dad69a6e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\output\jars\libs\javac.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c576121aac49e547b39aedfb1daa29782db4166c">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\javac_c031cc61f19deb625e1b37526de8fb663087e92b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\output\jars\libs\gson-2.8.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e118dd0900e4a18fb928ebb8df2d9fbda78f2b5d">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\gson-2.8.0_181e37f34c0822ece623e648a202956a1f9b7c90.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e32f015ff718a2a996876b1c37806182df2aaa93">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\classes_85dc4c55f121a1821d1bd1dcf322025d9a4713f2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\output\jars\libs\gson-extras-0.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b30c2655badcc7ce97f84e49f777b7dd154bad57">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\gson-extras-0.2.1_cc4d93f253ece32d3f7c635c9653ea3d39da000b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\Relicbot\.android\build-cache\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\output\jars\libs\Vuforia.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="91b46366eb9f8203073ee2935087c097c888c0ed">
+        <dex dex="C:\Users\Relicbot\Desktop\FTCRelicBot_GitHub\code\FTCRelicBot\TeamCode\build\intermediates\pre-dexed\debug\Vuforia_50360507df33e5a5c6a1555bbee2e3098669982f.jar" />
+    </item>
+
+</items>

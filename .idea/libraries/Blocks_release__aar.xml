@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Blocks-release:@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/d4546ea9496dfc8b9b243a36820eb239f0657bd2/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/d4546ea9496dfc8b9b243a36820eb239f0657bd2/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/Blocks-release-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\release\\menu\\menu_server.xml",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\d4546ea9496dfc8b9b243a36820eb239f0657bd2\\output\\res\\menu\\menu_server.xml"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\release\\menu\\ftc_robot_controller.xml",
+        "source": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\src\\main\\res\\menu\\ftc_robot_controller.xml"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\release\\menu\\main_menu.xml",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\343d409cdf0892d2b41ad91862a8632557b5e158\\output\\res\\menu\\main_menu.xml"
+    }
+]

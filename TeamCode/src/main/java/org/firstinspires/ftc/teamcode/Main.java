@@ -47,10 +47,10 @@ public class Main extends LinearOpMode {
     private Servo armGem, clawR, clawL;
     private double speedDevider = 1;
 
-    private double sliderInfLimit = -7200;
-    private double sliderSupLimit = 850;
-    private double armInfLimit = -950;
-    private double armSupLimit = 2600;
+    private double sliderInfLimit = 0;
+    private double sliderSupLimit = 8000;
+    private double armInfLimit = -3250;
+    private double armSupLimit = 0;
 
     @Override
     public void runOpMode() {
@@ -82,31 +82,16 @@ public class Main extends LinearOpMode {
         slider.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         arm   .setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-
-        // Wait for the game to start (driver presses PLAY)
-        waitForStart();
-        runtime.reset();
+        slider.setTargetPosition(0);
+        arm.setTargetPosition(0);
         armGem.setPosition(1);
 
-        slider.setTargetPosition(0);
-        slider.setPower(0.8);
-        while (slider.isBusy() && opModeIsActive()) {
-            if(Math.abs(0 - slider.getCurrentPosition()) < 50 )
-                slider.setPower(0.2);
-        }
-        slider.setPower(0);
-
-        arm.setTargetPosition(0);
-        arm.setPower(0.8);
-        while (arm.isBusy() && opModeIsActive()) {
-            if(Math.abs(0 - arm.getCurrentPosition()) < 50 )
-                arm.setPower(0.2);
-        }
-        arm.setPower(0);
+        // Wait for the game to start (driver presses PLAY)
+        runtime.reset();
+        waitForStart();
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-
             //CADRU
             double sasiuPowerY = (-gamepad1.left_stick_y / 1.5) / speedDevider;
             double sasiuPowerX = (gamepad1.left_stick_x / 1.5) / speedDevider;
@@ -149,17 +134,11 @@ public class Main extends LinearOpMode {
             }
 
             //slider
-              sliderInfLimit = -7200;
-              sliderSupLimit = 850;
-            if (-gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() < sliderSupLimit ||
-                    -gamepad2.left_stick_y < -0.1 && slider.getCurrentPosition() > sliderInfLimit)
+            if ((-gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() < sliderSupLimit) || (gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() > sliderInfLimit))
                 slider.setPower(-gamepad2.left_stick_y);
             else slider.setPower(0);
 
-
             //arm
-              armInfLimit = -950;
-              armSupLimit = 2600;
             if (-gamepad2.right_stick_y > 0.1 && arm.getCurrentPosition() < armSupLimit ||
                     -gamepad2.right_stick_y < -0.1 && arm.getCurrentPosition() > armInfLimit)
                 arm.setPower(-gamepad2.right_stick_y / 2);

@@ -1,0 +1,28 @@
+[
+    {
+        "outputFile": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v14\\values-v14.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endLine": 4,
+                    "endColumn": 12,
+                    "endOffset": 201
+                },
+                "from": {
+                    "file": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\values-v14\\values-v14.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endLine": 4,
+                        "endColumn": 12,
+                        "endOffset": 201
+                    }
+                }
+            }
+        ]
+    }
+]

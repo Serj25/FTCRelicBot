@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable\\icon_menu.png",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\343d409cdf0892d2b41ad91862a8632557b5e158\\output\\res\\drawable\\icon_menu.png"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable\\icon_robotcontroller.png",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\343d409cdf0892d2b41ad91862a8632557b5e158\\output\\res\\drawable\\icon_robotcontroller.png"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable\\button_shape.xml",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\drawable\\button_shape.xml"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable\\black_border.xml",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\d4546ea9496dfc8b9b243a36820eb239f0657bd2\\output\\res\\drawable\\black_border.xml"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\debug\\drawable\\feedback_shape_orange.xml",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\drawable\\feedback_shape_orange.xml"
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\TeamCode\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\ic_launcher.png",
+        "source": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\bundles\\default\\res\\drawable-hdpi-v4\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\TeamCode\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4\\button_shape.xml",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\drawable-hdpi-v4\\button_shape.xml"
+    }
+]

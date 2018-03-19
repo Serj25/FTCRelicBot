@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\simple_vertex_shader.glsl",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\raw\\simple_vertex_shader.glsl"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\cube_mesh_vertex_shader.glsl",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\raw\\cube_mesh_vertex_shader.glsl"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\nxtstartupsound.wav",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\raw\\nxtstartupsound.wav"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\warningmessage.wav",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\raw\\warningmessage.wav"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\errormessage.wav",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\raw\\errormessage.wav"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\cube_mesh_fragment_shader.glsl",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\raw\\cube_mesh_fragment_shader.glsl"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\chimedisconnect.wav",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\raw\\chimedisconnect.wav"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\chimeconnect.wav",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\6563e63562fd90e90a1e1d01be91ea76acc940a2\\output\\res\\raw\\chimeconnect.wav"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\color_fragment_shader.glsl",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\raw\\color_fragment_shader.glsl"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\texture_vertex_shader.glsl",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\raw\\texture_vertex_shader.glsl"
+    },
+    {
+        "merged": "C:\\Users\\Relicbot\\Desktop\\FTCRelicBot_GitHub\\code\\FTCRelicBot\\FtcRobotController\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\texture_fragment_shader.glsl",
+        "source": "C:\\Users\\Relicbot\\.android\\build-cache\\2c6f3ede45eeec6b582979e18c952eb83de6b2f3\\output\\res\\raw\\texture_fragment_shader.glsl"
+    }
+]
