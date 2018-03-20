@@ -32,8 +32,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
+import java.text.BreakIterator;
 
 
 @TeleOp(name="Main", group="Linear Opmode")
@@ -92,10 +95,14 @@ public class Main extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
+
             //CADRU
             double sasiuPowerY = (-gamepad1.left_stick_y / 1.5) / speedDevider;
             double sasiuPowerX = (gamepad1.left_stick_x / 1.5) / speedDevider;
             double rotPower = 0.7;
+
+            if(gamepad1.a) setBehaviour("Break");
+            else if (gamepad1.b) setBehaviour("Float");
 
             if(gamepad1.x) speedDevider = 4; //SlowMode ON
             else if(gamepad1.y) speedDevider = 1; //SlowMode OFF
@@ -133,19 +140,20 @@ public class Main extends LinearOpMode {
                 motor3.setPower(-rotPower);
             }
 
-            //slider
-            if ((-gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() < sliderSupLimit) || (gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() > sliderInfLimit))
+            //SLIDER
+            if ((-gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() < sliderSupLimit) ||
+                    (gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() > sliderInfLimit))
                 slider.setPower(-gamepad2.left_stick_y);
             else slider.setPower(0);
 
-            //arm
+            //ARM
             if (-gamepad2.right_stick_y > 0.1 && arm.getCurrentPosition() < armSupLimit ||
                     -gamepad2.right_stick_y < -0.1 && arm.getCurrentPosition() > armInfLimit)
                 arm.setPower(-gamepad2.right_stick_y / 2);
             else arm.setPower(0);
 
 
-            //claw
+            //CLAW
             if(gamepad2.left_bumper)
             {
                 clawL.setPosition(-1);
@@ -159,7 +167,7 @@ public class Main extends LinearOpMode {
                 sleep(50);
             }
 
-            //armGem
+            //ARMGEM
 
 
 
@@ -176,6 +184,21 @@ public class Main extends LinearOpMode {
             telemetry.addData("clawL", clawL.getPosition());
             telemetry.addData("clawR", clawR.getPosition());
             telemetry.update();
+        }
+    }
+
+    private void setBehaviour(String str){
+        if(str == "Break") {
+            motor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+            motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        }
+        else if(str == "Float"){
+            motor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+            motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         }
     }
 }
