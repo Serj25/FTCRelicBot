@@ -44,7 +44,7 @@ public class MainTeleOP extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor motor0, motor1, motor2, motor3 = null;
     private DcMotor slider, arm = null;
-    private Servo armGem, clawR, clawL;
+    private Servo armGem, clawR, clawL,cJointR,cJointL;
     private double speedDevider = 1;
 
     private double sliderInfLimit = 0;
@@ -66,8 +66,10 @@ public class MainTeleOP extends LinearOpMode {
         slider = hardwareMap.get(DcMotor.class, "Slider");
         arm    = hardwareMap.get(DcMotor.class,"Arm");
         armGem = hardwareMap.get(Servo.class, "ServoBratBila");
-        clawL  = hardwareMap.get(Servo.class, "ClawL");
-        clawR  = hardwareMap.get(Servo.class, "ClawR");
+        clawL  = hardwareMap.get(Servo.class, "ServoClawL");
+        clawR  = hardwareMap.get(Servo.class, "ServoClawR");
+        cJointL= hardwareMap.get(Servo.class, "ClawJointL");
+        cJointR= hardwareMap.get(Servo.class, "ClawJointR");
 
         motor0.setDirection(DcMotor.Direction.FORWARD);
         motor1.setDirection(DcMotor.Direction.FORWARD);
@@ -160,10 +162,12 @@ public class MainTeleOP extends LinearOpMode {
             else if(gamepad2.right_bumper)
             {
                 clawL.setPosition(1);
-                clawR.setPosition(-1 );
+                clawR.setPosition(-1);
                 sleep(50);
             }
 
+
+            //JOINT
 
 
             // Telemetry
