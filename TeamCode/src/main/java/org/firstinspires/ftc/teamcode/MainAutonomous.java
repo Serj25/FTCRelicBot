@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.ColorSensor;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
@@ -44,10 +45,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 import java.util.Locale;
 
-@Autonomous(name = "REVColorDistance", group = "Sensor")
+@Autonomous(name = "MainAutonomous", group = "FTC")
 //@Disabled
-public class BratBila extends LinearOpMode {
+public class MainAutonomous extends LinearOpMode {
 
+    private DcMotor motor0, motor1, motor2, motor3 = null;
     Servo servoBratBila;
     ColorSensor sensorBColor, sensorRColor;
     DistanceSensor sensorBDistance, sensorRDistance;
@@ -56,12 +58,30 @@ public class BratBila extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+        motor0 = hardwareMap.get(DcMotor.class, "MotorSF");
+        motor1 = hardwareMap.get(DcMotor.class, "MotorDF");
+        motor2 = hardwareMap.get(DcMotor.class, "MotorDS");
+        motor3 = hardwareMap.get(DcMotor.class, "MotorSS");
         sensorBColor = hardwareMap.get(ColorSensor.class, "Color/Range SensorBila");
         sensorBDistance = hardwareMap.get(DistanceSensor.class, "Color/Range SensorBila");
         sensorRColor = hardwareMap.get(ColorSensor.class, "Color/Range SensorRobot");
         sensorRDistance = hardwareMap.get(DistanceSensor.class, "Color/Range SensorRobot");
-
         servoBratBila = hardwareMap.get(Servo.class, "ServoBratBila");
+
+        motor0.setDirection(DcMotor.Direction.FORWARD);
+        motor1.setDirection(DcMotor.Direction.FORWARD);
+        motor2.setDirection(DcMotor.Direction.FORWARD);
+        motor3.setDirection(DcMotor.Direction.FORWARD);
+
+        motor0.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        motor3.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        motor0.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         float hsvValues[] = {0F, 0F, 0F};
         float hsvValues2[] = {0F, 0F, 0F};
@@ -114,19 +134,25 @@ public class BratBila extends LinearOpMode {
 //            telemetry.addData("Blue ", sensorBColor.blue());
 //            telemetry.addData("Hue", hsvValues[0]);
 
-            relativeLayout.post(new Runnable() {
-                public void run() {
-                    relativeLayout.setBackgroundColor(Color.HSVToColor(0xff, values));
-                }
-            });
-
             telemetry.update();
         }
+    }
+    void goForward() {
+        motor0.setTargetPosition(-200);
+        motor0.setPower(0.3);
+        while (motor0.isBusy() && opModeIsActive()) {
+            if(Math.abs(200 - motor0.getCurrentPosition()) < 50 )
+                motor0.setPower(0.2);
+        }
+        motor0.setPower(0);
 
-        relativeLayout.post(new Runnable() {
-            public void run() {
-                relativeLayout.setBackgroundColor(Color.WHITE);
-            }
-        });
+
+        motor0.setPower(0);
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
+    }
+    void goBackwards() {
+
     }
 }

@@ -32,16 +32,13 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import java.text.BreakIterator;
 
-
-@TeleOp(name="Main", group="Linear Opmode")
+@TeleOp(name="MainTeleOP", group="FTC")
 //@Disabled
-public class Main extends LinearOpMode {
+public class MainTeleOP extends LinearOpMode {
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -166,8 +163,6 @@ public class Main extends LinearOpMode {
                 clawR.setPosition(-1 );
                 sleep(50);
             }
-
-            //ARMGEM
 
 
 
