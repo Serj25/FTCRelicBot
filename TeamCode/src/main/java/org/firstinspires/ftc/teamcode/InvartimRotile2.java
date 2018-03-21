@@ -75,8 +75,8 @@ public class InvartimRotile2 extends LinearOpMode {
         brat.setDirection(DcMotor.Direction.FORWARD);
         gheara.setDirection(DcMotor.Direction.FORWARD);
 
-        brat.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        gheara.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        brat.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        gheara.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         brat.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         gheara.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);

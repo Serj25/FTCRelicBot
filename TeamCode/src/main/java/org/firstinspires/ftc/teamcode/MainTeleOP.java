@@ -44,14 +44,15 @@ public class MainTeleOP extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
     private DcMotor motor0, motor1, motor2, motor3 = null;
     private DcMotor slider, arm = null;
-    private Servo armGem, clawR, clawL,cJointR,cJointL;
+    private Servo armGem, clawR, clawL, cJoint;
 
     private double speedDevider = 1;
     private double sliderInfLimit = 0;
-    private double sliderSupLimit = 7500-;
+    private double sliderSupLimit = 7500;
     private double armInfLimit = -3250;
     private double armSupLimit = 0;
     private double jointPos = 0;
+    private double jointPos0 = 0;
 
     @Override
     public void runOpMode() {
@@ -69,8 +70,7 @@ public class MainTeleOP extends LinearOpMode {
         armGem = hardwareMap.get(Servo.class, "ServoBratBila");
         clawL  = hardwareMap.get(Servo.class, "ServoClawL");
         clawR  = hardwareMap.get(Servo.class, "ServoClawR");
-        cJointL= hardwareMap.get(Servo.class, "ClawJointL");
-        cJointR= hardwareMap.get(Servo.class, "ClawJointR");
+        cJoint= hardwareMap.get(Servo.class, "ClawJointL");
 
         motor0.setDirection(DcMotor.Direction.FORWARD);
         motor1.setDirection(DcMotor.Direction.FORWARD);
@@ -88,6 +88,8 @@ public class MainTeleOP extends LinearOpMode {
         slider.setTargetPosition(0);
         arm.setTargetPosition(0);
         armGem.setPosition(1);
+        cJoint.setPosition(0.5);
+        jointPos = 0.5;
 
         // Wait for the game to start (driver presses PLAY)
         runtime.reset();
@@ -104,8 +106,8 @@ public class MainTeleOP extends LinearOpMode {
             if(gamepad1.a) setBehaviour("Break");
             else if (gamepad1.b) setBehaviour("Float");
 
-            if(gamepad1.x) {speedDevider = 4; rotPower = 0.1;} //SlowMode ON
-            else if(gamepad1.y) { speedDevider = 1; rotPower = 0.7;} //SlowMode OFF
+            if(gamepad1.x) {speedDevider = 2.75; rotPower = 0.05;} //SlowMode ON
+            else if(gamepad1.y) { speedDevider = 1.3; rotPower = 0.7;} //SlowMode OFF
 
             if(gamepad1.left_stick_y == 0) {
                 motor0.setPower(0);
@@ -140,13 +142,17 @@ public class MainTeleOP extends LinearOpMode {
                 motor3.setPower(-rotPower);
             }
 
-            //SLIDER
-            if ((-gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() < sliderSupLimit) ||
-                    (gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() > sliderInfLimit))
+            //SLIDER  && slider.getCurrentPosition() < sliderSupLimit && slider.getCurrentPosition() > sliderInfLimit
+            sliderInfLimit = 0;
+            sliderSupLimit = 7700;
+            if (-gamepad2.left_stick_y > 0.1  && slider.getCurrentPosition() < sliderSupLimit ||
+                    gamepad2.left_stick_y > 0.1 && slider.getCurrentPosition() > sliderInfLimit)
                 slider.setPower(-gamepad2.left_stick_y);
             else slider.setPower(0);
 
-            //ARM
+            //ARM && arm.getCurrentPosition() < armSupLimit && arm.getCurrentPosition() > armInfLimit
+            armInfLimit = -3250;
+            armSupLimit = 0;
             if (-gamepad2.right_stick_y > 0.1 && arm.getCurrentPosition() < armSupLimit ||
                     -gamepad2.right_stick_y < -0.1 && arm.getCurrentPosition() > armInfLimit)
                 arm.setPower(-gamepad2.right_stick_y / 2);
@@ -169,19 +175,78 @@ public class MainTeleOP extends LinearOpMode {
 
 
             //JOINT
-            if(gamepad2.left_trigger != 0)
-            {
-                jointPos += 0.1;
-                cJointR.setPosition(-jointPos);
-                cJointL.setPosition(jointPos);
-                sleep(50);
+            if(gamepad2.left_trigger != 0 && jointPos < 0.84) {
+                    jointPos = jointPos + 0.02;
+                    //cJointR.setPosition(-jointPos);
+                    cJoint.setPosition(jointPos);
+                    sleep(50);
             }
-            else if(gamepad2.right_trigger != 0)
+            else if(gamepad2.right_trigger != 0 && jointPos > 0.18)
             {
-                jointPos -= 0.1;
-                cJointR.setPosition(-jointPos);
-                cJointL.setPosition(jointPos);
-                sleep(50);
+                    jointPos = jointPos - 0.02;
+                    //cJointR.setPosition(-jointPos);
+                    cJoint.setPosition(jointPos);
+                    sleep(50);
+            }
+
+            //RESET ARM AND SLIDER
+            if(gamepad2.y)
+            {
+                slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                slider.setTargetPosition(0);
+                slider.setPower(0.5);
+                while(slider.isBusy() && opModeIsActive()) {
+                    telemetry.addData("RESETING SLIDER", "");
+                    telemetry.update();
+                }
+                slider.setPower(0);
+                slider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+                if(slider.getCurrentPosition() >= -30 || slider.getCurrentPosition() <= 30) {
+                    arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    arm.setTargetPosition(0);
+                    arm.setPower(0.5);
+                    while(arm.isBusy() && opModeIsActive()) {
+                        telemetry.addData("RESETING ARM", "");
+                        telemetry.update();
+                    }
+                    arm.setPower(0);
+                    arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                }
+                if(arm.getCurrentPosition() >= -30 || arm.getCurrentPosition() <= 30)
+                {   cJoint.setPosition(0.5);
+                   // cJointR.setPosition(0);
+                }
+            }
+
+            //CONTAINERS
+            if(gamepad2.dpad_down) { //parter
+                slider.setTargetPosition(737);
+                arm.setTargetPosition(-3021);
+                cJoint.setPosition(0.34);
+
+                goToPos();
+            }
+            else if(gamepad2.dpad_left) { //etaj1
+                slider.setTargetPosition(2649);
+                arm.setTargetPosition(-2681);
+                cJoint.setPosition(0.46);
+
+                goToPos();
+            }
+            else if(gamepad2.dpad_right) { //etaj2
+                slider.setTargetPosition(4574);
+                arm.setTargetPosition(-2524);
+                cJoint.setPosition(0.6);
+
+                goToPos();
+            }
+            else if(gamepad2.dpad_up) { //etaj3
+                slider.setTargetPosition(2489);
+                arm.setTargetPosition(-1300);
+                cJoint.setPosition(0.78);
+
+                goToPos();
             }
 
             // Telemetry
@@ -196,8 +261,34 @@ public class MainTeleOP extends LinearOpMode {
             telemetry.addData("sasiuPowerY: ", sasiuPowerY);
             telemetry.addData("clawL", clawL.getPosition());
             telemetry.addData("clawR", clawR.getPosition());
+            telemetry.addData("jointPos", jointPos);
             telemetry.update();
         }
+    }
+
+    private void goToPos() {
+        slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        slider.setPower(0.4);
+        while(slider.isBusy() && opModeIsActive()) {
+            telemetry.addData("SLIDER MOVING", "");
+            telemetry.addData("Slider: ", slider.getCurrentPosition());
+            telemetry.addData("Arm: ", arm.getCurrentPosition());
+            telemetry.addData("CJoint: ", cJoint.getPosition());
+            telemetry.update();
+        }
+        slider.setPower(0);
+        arm.setPower(0.4);
+        while(arm.isBusy() && opModeIsActive()) {
+            telemetry.addData("ARM MOVING", "");
+            telemetry.addData("Slider: ", slider.getCurrentPosition());
+            telemetry.addData("Arm: ", arm.getCurrentPosition());
+            telemetry.addData("CJoint: ", cJoint.getPosition());
+            telemetry.update();
+        }
+        arm.setPower(0);
+        slider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        arm.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     private void setBehaviour(String str){

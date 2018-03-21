@@ -41,7 +41,12 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
+import org.firstinspires.ftc.robotcore.external.navigation.RelicRecoveryVuMark;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackable;
+import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 import java.util.Locale;
 
@@ -50,10 +55,11 @@ import java.util.Locale;
 public class MainAutonomous extends LinearOpMode {
 
     private DcMotor motor0, motor1, motor2, motor3 = null;
-    Servo servoBratBila;
-    ColorSensor sensorBColor, sensorRColor;
-    DistanceSensor sensorBDistance, sensorRDistance;
-    String glyphColor, stoneColor;
+    private Servo servoBratBila;
+    private ColorSensor sensorBColor, sensorRColor;
+    private DistanceSensor sensorBDistance, sensorRDistance;
+    private String glyphColor, stoneColor;
+    private VuforiaLocalizer vuforia;
 
     @Override
     public void runOpMode() {
@@ -83,22 +89,46 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        servoBratBila.setPosition(1);
+
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
+
+        parameters.vuforiaLicenseKey = "AQoPNMX/////AAAAmad8NGRfnEv5lNS9s8cLm15ptksz2lDHtlK8+I/786kCdGjmFbNPW6iu9h7uJ1sXIChUyVAaSP0CD4ES7fguxYHIxlkuwz/MrOzyI9Wa2j5daMbcpXiHlGPYREiIqshHDjK13EGJtIVYfmI6d1JAoXmKbdQv43VDjyAJs4dYnHEdoBCalTdOX4KusyfQMckrkiutQnnHY9KHojBIEaQJTfKHEspulWitJBwkdLaWDBaXBlTekaa/aZyoZGsLsnW9lO7f/59KnS25gFyuuLLXWrJCnOipz+UyPB9dKJoEVIz6gvF2+rVyVIU6wMlgPP+e7LAVjP83S4qG8RK1CaRhnSfCMTE/0YC6Vuj0VSQwBGAX";
+        parameters.cameraDirection = VuforiaLocalizer.CameraDirection.FRONT;
+        this.vuforia = ClassFactory.createVuforiaLocalizer(parameters);
+
+        VuforiaTrackables relicTrackables = this.vuforia.loadTrackablesFromAsset("RelicVuMark");
+        VuforiaTrackable relicTemplate = relicTrackables.get(0);
+        relicTemplate.setName("relicVuMarkTemplate"); // can help in debugging; otherwise not necessary
+
+
         float hsvValues[] = {0F, 0F, 0F};
         float hsvValues2[] = {0F, 0F, 0F};
         final float values[] = hsvValues;
         final float values2[] = hsvValues2;
         final double SCALE_FACTOR = 255;
-        int relativeLayoutId = hardwareMap.appContext.getResources().getIdentifier("RelativeLayout", "id", hardwareMap.appContext.getPackageName());
-        final View relativeLayout = ((Activity) hardwareMap.appContext).findViewById(relativeLayoutId);
 
         waitForStart();
+        relicTrackables.activate();
 
         while (opModeIsActive()) {
+
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+            if(vuMark == RelicRecoveryVuMark.LEFT)
+                telemetry.addData("RelicRecoveryVuMark", "LEFT");
+            else if(vuMark == RelicRecoveryVuMark.CENTER)
+                telemetry.addData("RelicRecoveryVuMark", "CENTER");
+            else if(vuMark == RelicRecoveryVuMark.RIGHT)
+                telemetry.addData("RelicRecoveryVuMark", "RIGHT");
+            else telemetry.addData("RelicRecoveryVuMark", "UNKNOWNNNNNNN");
+
+
 
             telemetry.addData("Coboram Bratul", "");
             telemetry.update();
             sleep(1000);
-            servoBratBila.setPosition(-0.5);
+            servoBratBila.setPosition(0.3);
 
             telemetry.addData("Scanam Culoarea", "");
             telemetry.update();
@@ -122,7 +152,19 @@ public class MainAutonomous extends LinearOpMode {
                 stoneColor = "Red";
             else stoneColor = "Blue";
 
+            telemetry.addData("GlyphCOLOR: ", glyphColor);
+            telemetry.addData("StoneCOLOR: ", stoneColor);
+            telemetry.update();
+            sleep(1000);
+
             if(stoneColor != glyphColor)
+                telemetry.addData("Going", "FORWARD");
+            else telemetry.addData("Going", "BACKWARDS");
+            telemetry.update();
+            sleep(1000);
+
+            if(stoneColor != glyphColor) goForward();
+            else goBackwards();
 
 
 //            telemetry.addData("Color: ", glyphColor);
@@ -139,20 +181,34 @@ public class MainAutonomous extends LinearOpMode {
     }
     void goForward() {
         motor0.setTargetPosition(-200);
+        motor1.setTargetPosition(200);
+        motor2.setTargetPosition(200);
+        motor3.setTargetPosition(-200);
+
         motor0.setPower(0.3);
         while (motor0.isBusy() && opModeIsActive()) {
             if(Math.abs(200 - motor0.getCurrentPosition()) < 50 )
                 motor0.setPower(0.2);
         }
         motor0.setPower(0);
-
-
-        motor0.setPower(0);
         motor1.setPower(0);
         motor2.setPower(0);
         motor3.setPower(0);
     }
     void goBackwards() {
+        motor0.setTargetPosition(200);
+        motor1.setTargetPosition(-200);
+        motor2.setTargetPosition(-200);
+        motor3.setTargetPosition(200);
 
+        motor0.setPower(0.3);
+        while (motor0.isBusy() && opModeIsActive()) {
+            if(Math.abs(200 - motor0.getCurrentPosition()) < 50 )
+                motor0.setPower(0.2);
+        }
+        motor0.setPower(0);
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
     }
 }
