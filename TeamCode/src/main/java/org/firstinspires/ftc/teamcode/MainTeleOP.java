@@ -45,12 +45,13 @@ public class MainTeleOP extends LinearOpMode {
     private DcMotor motor0, motor1, motor2, motor3 = null;
     private DcMotor slider, arm = null;
     private Servo armGem, clawR, clawL,cJointR,cJointL;
-    private double speedDevider = 1;
 
+    private double speedDevider = 1;
     private double sliderInfLimit = 0;
-    private double sliderSupLimit = 8000;
+    private double sliderSupLimit = 7500-;
     private double armInfLimit = -3250;
     private double armSupLimit = 0;
+    private double jointPos = 0;
 
     @Override
     public void runOpMode() {
@@ -103,8 +104,8 @@ public class MainTeleOP extends LinearOpMode {
             if(gamepad1.a) setBehaviour("Break");
             else if (gamepad1.b) setBehaviour("Float");
 
-            if(gamepad1.x) speedDevider = 4; //SlowMode ON
-            else if(gamepad1.y) speedDevider = 1; //SlowMode OFF
+            if(gamepad1.x) {speedDevider = 4; rotPower = 0.1;} //SlowMode ON
+            else if(gamepad1.y) { speedDevider = 1; rotPower = 0.7;} //SlowMode OFF
 
             if(gamepad1.left_stick_y == 0) {
                 motor0.setPower(0);
@@ -168,7 +169,20 @@ public class MainTeleOP extends LinearOpMode {
 
 
             //JOINT
-
+            if(gamepad2.left_trigger != 0)
+            {
+                jointPos += 0.1;
+                cJointR.setPosition(-jointPos);
+                cJointL.setPosition(jointPos);
+                sleep(50);
+            }
+            else if(gamepad2.right_trigger != 0)
+            {
+                jointPos -= 0.1;
+                cJointR.setPosition(-jointPos);
+                cJointL.setPosition(jointPos);
+                sleep(50);
+            }
 
             // Telemetry
             telemetry.addData("Status", "Run Time: " + runtime.toString());
