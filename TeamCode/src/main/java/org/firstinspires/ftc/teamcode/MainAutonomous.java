@@ -55,11 +55,14 @@ import java.util.Locale;
 public class MainAutonomous extends LinearOpMode {
 
     private DcMotor motor0, motor1, motor2, motor3 = null;
-    private Servo servoBratBila;
+    private Servo servoBratBila, clawL, clawR;
     private ColorSensor sensorBColor, sensorRColor;
     private DistanceSensor sensorBDistance, sensorRDistance;
     private String glyphColor, stoneColor;
     private VuforiaLocalizer vuforia;
+    private DcMotor slider, arm = null;
+    private Servo cJoint;
+    private float y;
 
     @Override
     public void runOpMode() {
@@ -73,6 +76,11 @@ public class MainAutonomous extends LinearOpMode {
         sensorRColor = hardwareMap.get(ColorSensor.class, "Color/Range SensorRobot");
         sensorRDistance = hardwareMap.get(DistanceSensor.class, "Color/Range SensorRobot");
         servoBratBila = hardwareMap.get(Servo.class, "ServoBratBila");
+        clawL = hardwareMap.get(Servo.class, "ServoClawL");
+        clawR = hardwareMap.get(Servo.class, "ServoClawR");
+        slider = hardwareMap.get(DcMotor.class, "Slider");
+        arm = hardwareMap.get(DcMotor.class, "Arm");
+        cJoint = hardwareMap.get(Servo.class, "ClawJointL");
 
         motor0.setDirection(DcMotor.Direction.FORWARD);
         motor1.setDirection(DcMotor.Direction.FORWARD);
@@ -89,7 +97,23 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         motor3.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        slider.setDirection(DcMotor.Direction.FORWARD);
+        arm.setDirection(DcMotor.Direction.FORWARD);
+
+        slider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        slider.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+
+        slider.setTargetPosition(0);
+        arm.setTargetPosition(0);
+        cJoint.setPosition(0.5);
+
         servoBratBila.setPosition(1);
+
+        clawL.setPosition(1);
+        clawR.setPosition(-1);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         VuforiaLocalizer.Parameters parameters = new VuforiaLocalizer.Parameters(cameraMonitorViewId);
@@ -114,21 +138,57 @@ public class MainAutonomous extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
-            if(vuMark == RelicRecoveryVuMark.LEFT)
+            goForward(2000);
+            motor0.setPower(0);
+            motor1.setPower(0);
+            motor2.setPower(0);
+            motor3.setPower(0);
+
+            arm.setTargetPosition(65);
+            slider.setTargetPosition(3240);
+            arm.setPower(0.3);
+            slider.setPower(0.3);
+            while (arm.isBusy() && opModeIsActive()) {
+                if (Math.abs(65 - arm.getCurrentPosition()) < 50) {
+                    arm.setPower(0.2);
+                }
+                while (slider.isBusy() && opModeIsActive()) {
+                    if (Math.abs(3240 - slider.getCurrentPosition()) < 50) {
+                        slider.setPower(0.2);
+                    }
+                    arm.setPower(0);
+                    slider.setPower(0);
+
+                    cJoint.setPosition(0.7);
+                    sleep(100);
+                    clawL.setPosition(-1);
+                    clawR.setPosition(1);
+
+
+                    //rotate(100);
+
+            /*RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+            if(vuMark == RelicRecoveryVuMark.LEFT) {
                 telemetry.addData("RelicRecoveryVuMark", "LEFT");
-            else if(vuMark == RelicRecoveryVuMark.CENTER)
+                y = 1;
+            }
+            else if(vuMark == RelicRecoveryVuMark.CENTER) {
                 telemetry.addData("RelicRecoveryVuMark", "CENTER");
-            else if(vuMark == RelicRecoveryVuMark.RIGHT)
+                y = 2;
+            }
+            else if(vuMark == RelicRecoveryVuMark.RIGHT) {
                 telemetry.addData("RelicRecoveryVuMark", "RIGHT");
-            else telemetry.addData("RelicRecoveryVuMark", "UNKNOWNNNNNNN");
+                y = 3;
+            }
+            else {telemetry.addData("RelicRecoveryVuMark", "UNKNOWNNNNNNN");
+                  y=3;}
 
 
 
             telemetry.addData("Coboram Bratul", "");
             telemetry.update();
-            sleep(1000);
-            servoBratBila.setPosition(0.3);
+            sleep(300);
+           // servoBratBila.setPosition(0.48);  ///////////////////////SERVO BRAT BILA
 
             telemetry.addData("Scanam Culoarea", "");
             telemetry.update();
@@ -155,17 +215,37 @@ public class MainAutonomous extends LinearOpMode {
             telemetry.addData("GlyphCOLOR: ", glyphColor);
             telemetry.addData("StoneCOLOR: ", stoneColor);
             telemetry.update();
-            sleep(1000);
+            sleep(200);*/
 
-            if(stoneColor != glyphColor)
+                    //goForward(2500);
+                    sleep(500);
+
+            /*if(stoneColor == "Red")if(y == 3)y = 1;
+                                   else if(y == 1)y = 3;
+
+            if(stoneColor == "Blue")if(y == 1)goSideways(500);
+                               else if (y == 2)goSideways(1000);
+                                    else goSideways(1500);
+            else if(y == 1)goSideways(-500);
+                 else if (y == 2)goSideways(-1000);
+                      else goSideways(-1500);*/
+
+                    sleep(20000);
+
+           /* if(stoneColor != glyphColor)
                 telemetry.addData("Going", "FORWARD");
             else telemetry.addData("Going", "BACKWARDS");
             telemetry.update();
+            sleep(200);
+
+            if(stoneColor != glyphColor) goForward(20);
+            else goBackwards(20);
             sleep(1000);
 
-            if(stoneColor != glyphColor) goForward();
-            else goBackwards();
+            servoBratBila.setPosition(1);
 
+            goForward(2300); //Mergi inainte o placa
+            sleep(10000);*/
 
 //            telemetry.addData("Color: ", glyphColor);
 //            telemetry.addData("Distance (cm)",
@@ -176,35 +256,107 @@ public class MainAutonomous extends LinearOpMode {
 //            telemetry.addData("Blue ", sensorBColor.blue());
 //            telemetry.addData("Hue", hsvValues[0]);
 
-            telemetry.update();
+                    telemetry.update();
+                }
+                /// slider 3240   arm 65   joint 0.7
+            }
         }
     }
-    void goForward() {
-        motor0.setTargetPosition(-200);
-        motor1.setTargetPosition(200);
-        motor2.setTargetPosition(200);
-        motor3.setTargetPosition(-200);
 
-        motor0.setPower(0.3);
+    private void goForward(int x) {
+        motor0.setTargetPosition(-x);
+        motor1.setTargetPosition(x);
+        motor2.setTargetPosition(x);
+        motor3.setTargetPosition(-x);
+
+        motor0.setPower(0.4);
+        motor1.setPower(0.5);
+        motor2.setPower(0.4);
+        motor3.setPower(0.5);
+
         while (motor0.isBusy() && opModeIsActive()) {
-            if(Math.abs(200 - motor0.getCurrentPosition()) < 50 )
+            if (Math.abs(x - motor0.getCurrentPosition()) < 50) {
                 motor0.setPower(0.2);
+                motor1.setPower(0);
+                motor2.setPower(0.2);
+                motor3.setPower(0);
+            }
         }
         motor0.setPower(0);
         motor1.setPower(0);
         motor2.setPower(0);
         motor3.setPower(0);
     }
-    void goBackwards() {
-        motor0.setTargetPosition(200);
-        motor1.setTargetPosition(-200);
-        motor2.setTargetPosition(-200);
-        motor3.setTargetPosition(200);
+
+    private void goBackwards(int x) {
+        motor0.setTargetPosition(x);
+        motor1.setTargetPosition(-x);
+        motor2.setTargetPosition(-x);
+        motor3.setTargetPosition(x);
 
         motor0.setPower(0.3);
+        motor1.setPower(0.3);
+        motor2.setPower(0.3);
+        motor3.setPower(0.3);
+
         while (motor0.isBusy() && opModeIsActive()) {
-            if(Math.abs(200 - motor0.getCurrentPosition()) < 50 )
+            if (Math.abs(x - motor0.getCurrentPosition()) < 50) {
                 motor0.setPower(0.2);
+                motor1.setPower(0.2);
+                motor2.setPower(0.2);
+                motor3.setPower(0.2);
+            }
+        }
+        motor0.setPower(0);
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
+    }
+
+    private void goSideways(int x){
+        motor0.setTargetPosition(-x);
+        motor1.setTargetPosition(x);
+        motor2.setTargetPosition(x);
+        motor3.setTargetPosition(-x);
+
+        motor0.setPower(0.3);
+        motor1.setPower(0.3);
+        motor2.setPower(0.3);
+        motor3.setPower(0.3);
+
+        while (motor0.isBusy() && opModeIsActive()) {
+            if(Math.abs(x - motor0.getCurrentPosition()) < 50 )
+            {
+                motor0.setPower(0.2);
+                motor1.setPower(0.2);
+                motor2.setPower(0.2);
+                motor3.setPower(0.2);
+            }
+        }
+        motor0.setPower(0);
+        motor1.setPower(0);
+        motor2.setPower(0);
+        motor3.setPower(0);
+    }
+    private void rotate(int x){
+        motor0.setTargetPosition(x);
+        motor1.setTargetPosition(x);
+        motor2.setTargetPosition(x);
+        motor3.setTargetPosition(x);
+
+        motor0.setPower(0.3);
+        motor1.setPower(0.3);
+        motor2.setPower(0.3);
+        motor3.setPower(0.3);
+
+        while (motor0.isBusy() && opModeIsActive()) {
+            if(Math.abs(x - motor0.getCurrentPosition()) < 50 )
+            {
+                motor0.setPower(0.2);
+                motor1.setPower(0.2);
+                motor2.setPower(0.2);
+                motor3.setPower(0.2);
+            }
         }
         motor0.setPower(0);
         motor1.setPower(0);

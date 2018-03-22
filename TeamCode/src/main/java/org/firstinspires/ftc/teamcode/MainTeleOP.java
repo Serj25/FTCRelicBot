@@ -106,7 +106,7 @@ public class MainTeleOP extends LinearOpMode {
             if(gamepad1.a) setBehaviour("Break");
             else if (gamepad1.b) setBehaviour("Float");
 
-            if(gamepad1.x) {speedDevider = 2.75; rotPower = 0.05;} //SlowMode ON
+            if(gamepad1.x) {speedDevider = 2.75; rotPower = 0.005;} //SlowMode ON
             else if(gamepad1.y) { speedDevider = 1.3; rotPower = 0.7;} //SlowMode OFF
 
             if(gamepad1.left_stick_y == 0) {
@@ -223,28 +223,28 @@ public class MainTeleOP extends LinearOpMode {
             if(gamepad2.dpad_down) { //parter
                 slider.setTargetPosition(737);
                 arm.setTargetPosition(-3021);
-                cJoint.setPosition(0.34);
+                cJoint.setPosition(0.7);
 
                 goToPos();
             }
             else if(gamepad2.dpad_left) { //etaj1
                 slider.setTargetPosition(2649);
                 arm.setTargetPosition(-2681);
-                cJoint.setPosition(0.46);
+                cJoint.setPosition(0.56);
 
                 goToPos();
             }
             else if(gamepad2.dpad_right) { //etaj2
                 slider.setTargetPosition(4574);
                 arm.setTargetPosition(-2524);
-                cJoint.setPosition(0.6);
+                cJoint.setPosition(0.44);
 
                 goToPos();
             }
             else if(gamepad2.dpad_up) { //etaj3
                 slider.setTargetPosition(2489);
                 arm.setTargetPosition(-1300);
-                cJoint.setPosition(0.78);
+                cJoint.setPosition(0.24);
 
                 goToPos();
             }
