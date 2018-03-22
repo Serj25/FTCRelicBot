@@ -139,6 +139,8 @@ public class MainAutonomous extends LinearOpMode {
         while (opModeIsActive()) {
 
             goForward(2727);
+            sleep(300);
+            goSideways(290);
             sleep(30000);
             /*
             motor0.setPower(0);
@@ -341,6 +343,7 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setPower(0);
         motor3.setPower(0);
     }
+
     private void rotate(int x){
         motor0.setTargetPosition(x);
         motor1.setTargetPosition(x);

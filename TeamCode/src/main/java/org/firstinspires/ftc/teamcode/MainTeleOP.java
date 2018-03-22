@@ -220,31 +220,31 @@ public class MainTeleOP extends LinearOpMode {
             }
 
             //CONTAINERS
-            if(gamepad2.dpad_down) { //parter
-                slider.setTargetPosition(737);
-                arm.setTargetPosition(-3021);
+            if(gamepad2.dpad_down) { //etaj 0
+                slider.setTargetPosition(-2);
+                arm.setTargetPosition(-3358);
                 cJoint.setPosition(0.7);
 
                 goToPos();
             }
             else if(gamepad2.dpad_left) { //etaj1
-                slider.setTargetPosition(2649);
-                arm.setTargetPosition(-2681);
-                cJoint.setPosition(0.56);
+                slider.setTargetPosition(-2);
+                arm.setTargetPosition(-2661);
+                cJoint.setPosition(0.54);
 
                 goToPos();
             }
-            else if(gamepad2.dpad_right) { //etaj2
-                slider.setTargetPosition(4574);
-                arm.setTargetPosition(-2524);
-                cJoint.setPosition(0.44);
+            else if(gamepad2.dpad_up) { //etaj2
+                slider.setTargetPosition(-2);
+                arm.setTargetPosition(-1992);
+                cJoint.setPosition(0.38);
 
                 goToPos();
             }
-            else if(gamepad2.dpad_up) { //etaj3
-                slider.setTargetPosition(2489);
-                arm.setTargetPosition(-1300);
-                cJoint.setPosition(0.24);
+            else if(gamepad2.dpad_right) { //etaj3
+                slider.setTargetPosition(1288);
+                arm.setTargetPosition(-1781);
+                cJoint.setPosition(0.3) ffff ;
 
                 goToPos();
             }
