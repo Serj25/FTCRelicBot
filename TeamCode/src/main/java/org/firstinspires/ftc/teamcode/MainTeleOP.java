@@ -244,7 +244,7 @@ public class MainTeleOP extends LinearOpMode {
             else if(gamepad2.dpad_right) { //etaj3
                 slider.setTargetPosition(1288);
                 arm.setTargetPosition(-1781);
-                cJoint.setPosition(0.3) ffff ;
+                cJoint.setPosition(0.3);
 
                 goToPos();
             }
