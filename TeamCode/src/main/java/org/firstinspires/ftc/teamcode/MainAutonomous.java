@@ -138,11 +138,14 @@ public class MainAutonomous extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            goForward(2000);
+            goForward(2727);
+            sleep(30000);
+            /*
             motor0.setPower(0);
             motor1.setPower(0);
             motor2.setPower(0);
             motor3.setPower(0);
+            */
 
             arm.setTargetPosition(65);
             slider.setTargetPosition(3240);
@@ -274,7 +277,7 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setPower(0.4);
         motor3.setPower(0.5);
 
-        while (motor0.isBusy() && opModeIsActive()) {
+        while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
             if (Math.abs(x - motor0.getCurrentPosition()) < 50) {
                 motor0.setPower(0.2);
                 motor1.setPower(0);
@@ -299,7 +302,7 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setPower(0.3);
         motor3.setPower(0.3);
 
-        while (motor0.isBusy() && opModeIsActive()) {
+        while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
             if (Math.abs(x - motor0.getCurrentPosition()) < 50) {
                 motor0.setPower(0.2);
                 motor1.setPower(0.2);
@@ -314,9 +317,9 @@ public class MainAutonomous extends LinearOpMode {
     }
 
     private void goSideways(int x){
-        motor0.setTargetPosition(-x);
+        motor0.setTargetPosition(x);
         motor1.setTargetPosition(x);
-        motor2.setTargetPosition(x);
+        motor2.setTargetPosition(-x);
         motor3.setTargetPosition(-x);
 
         motor0.setPower(0.3);
@@ -324,7 +327,7 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setPower(0.3);
         motor3.setPower(0.3);
 
-        while (motor0.isBusy() && opModeIsActive()) {
+        while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
             if(Math.abs(x - motor0.getCurrentPosition()) < 50 )
             {
                 motor0.setPower(0.2);
