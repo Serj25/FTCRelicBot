@@ -33,6 +33,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.view.View;
 
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cRangeSensor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -74,7 +75,7 @@ public class MainAutonomous extends LinearOpMode {
         sensorBColor = hardwareMap.get(ColorSensor.class, "Color/Range SensorBila");
         sensorBDistance = hardwareMap.get(DistanceSensor.class, "Color/Range SensorBila");
         sensorRColor = hardwareMap.get(ColorSensor.class, "Color/Range SensorRobot");
-        sensorRDistance = hardwareMap.get(DistanceSensor.class, "Color/Range SensorRobot");
+        sensorRDistance = hardwareMap.get(ModernRoboticsI2cRangeSensor.class, "Range SensorFront");
         servoBratBila = hardwareMap.get(Servo.class, "ServoBratBila");
         clawL = hardwareMap.get(Servo.class, "ServoClawL");
         clawR = hardwareMap.get(Servo.class, "ServoClawR");
@@ -139,15 +140,7 @@ public class MainAutonomous extends LinearOpMode {
         while (opModeIsActive()) {
 
             goForward(2727);
-            sleep(300);
-            goSideways(290);
             sleep(30000);
-            /*
-            motor0.setPower(0);
-            motor1.setPower(0);
-            motor2.setPower(0);
-            motor3.setPower(0);
-            */
 
             arm.setTargetPosition(65);
             slider.setTargetPosition(3240);
@@ -169,10 +162,9 @@ public class MainAutonomous extends LinearOpMode {
                     clawL.setPosition(-1);
                     clawR.setPosition(1);
 
-
                     //rotate(100);
 
-            /*RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
+            RelicRecoveryVuMark vuMark = RelicRecoveryVuMark.from(relicTemplate);
             if(vuMark == RelicRecoveryVuMark.LEFT) {
                 telemetry.addData("RelicRecoveryVuMark", "LEFT");
                 y = 1;
@@ -193,7 +185,7 @@ public class MainAutonomous extends LinearOpMode {
             telemetry.addData("Coboram Bratul", "");
             telemetry.update();
             sleep(300);
-           // servoBratBila.setPosition(0.48);  ///////////////////////SERVO BRAT BILA
+            servoBratBila.setPosition(0.48);  ///////////////////////SERVO BRAT BILA
 
             telemetry.addData("Scanam Culoarea", "");
             telemetry.update();
@@ -220,7 +212,7 @@ public class MainAutonomous extends LinearOpMode {
             telemetry.addData("GlyphCOLOR: ", glyphColor);
             telemetry.addData("StoneCOLOR: ", stoneColor);
             telemetry.update();
-            sleep(200);*/
+            sleep(200);
 
                     //goForward(2500);
                     sleep(500);
@@ -269,22 +261,27 @@ public class MainAutonomous extends LinearOpMode {
     }
 
     private void goForward(int x) {
+       /* double initdist;
+        initdist = sensorRDistance.getDistance(DistanceUnit.CM);
+        while ((initdist-sensorRDistance.getDistance(DistanceUnit.CM))>x) {
+            telemetry.addData("Distanta Masurata: ", "%f cm", sensorRDistance.getDistance(DistanceUnit.CM));
+            telemetry.update();*/
         motor0.setTargetPosition(-x);
         motor1.setTargetPosition(x);
         motor2.setTargetPosition(x);
         motor3.setTargetPosition(-x);
 
-        motor0.setPower(0.4);
-        motor1.setPower(0.5);
-        motor2.setPower(0.4);
-        motor3.setPower(0.5);
+            motor0.setPower(0.4);//was 0.4
+            motor1.setPower(0.4);//was 0.5
+            motor2.setPower(0.4);//was 0.4
+            motor3.setPower(0.03);//was 0.5
 
-        while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
+                while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
             if (Math.abs(x - motor0.getCurrentPosition()) < 50) {
                 motor0.setPower(0.2);
-                motor1.setPower(0);
+                motor1.setPower(0.2);
                 motor2.setPower(0.2);
-                motor3.setPower(0);
+                motor3.setPower(0.01);
             }
         }
         motor0.setPower(0);
@@ -299,17 +296,17 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setTargetPosition(-x);
         motor3.setTargetPosition(x);
 
-        motor0.setPower(0.3);
-        motor1.setPower(0.3);
-        motor2.setPower(0.3);
-        motor3.setPower(0.3);
+        motor0.setPower(0.4);
+        motor1.setPower(0.4);
+        motor2.setPower(0.4);
+        motor3.setPower(0.03);
 
         while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
             if (Math.abs(x - motor0.getCurrentPosition()) < 50) {
                 motor0.setPower(0.2);
                 motor1.setPower(0.2);
                 motor2.setPower(0.2);
-                motor3.setPower(0.2);
+                motor3.setPower(0.01);
             }
         }
         motor0.setPower(0);
@@ -324,10 +321,10 @@ public class MainAutonomous extends LinearOpMode {
         motor2.setTargetPosition(-x);
         motor3.setTargetPosition(-x);
 
-        motor0.setPower(0.3);
-        motor1.setPower(0.3);
-        motor2.setPower(0.3);
-        motor3.setPower(0.3);
+        motor0.setPower(0.4);
+        motor1.setPower(0.4);
+        motor2.setPower(0.4);
+        motor3.setPower(0.03);
 
         while (motor0.isBusy() && motor1.isBusy() && motor2.isBusy() && motor3.isBusy() && opModeIsActive()) {
             if(Math.abs(x - motor0.getCurrentPosition()) < 50 )
@@ -335,7 +332,7 @@ public class MainAutonomous extends LinearOpMode {
                 motor0.setPower(0.2);
                 motor1.setPower(0.2);
                 motor2.setPower(0.2);
-                motor3.setPower(0.2);
+                motor3.setPower(0.01);
             }
         }
         motor0.setPower(0);
@@ -353,7 +350,7 @@ public class MainAutonomous extends LinearOpMode {
         motor0.setPower(0.3);
         motor1.setPower(0.3);
         motor2.setPower(0.3);
-        motor3.setPower(0.3);
+        motor3.setPower(0.03);
 
         while (motor0.isBusy() && opModeIsActive()) {
             if(Math.abs(x - motor0.getCurrentPosition()) < 50 )
@@ -361,7 +358,7 @@ public class MainAutonomous extends LinearOpMode {
                 motor0.setPower(0.2);
                 motor1.setPower(0.2);
                 motor2.setPower(0.2);
-                motor3.setPower(0.2);
+                motor3.setPower(0.02);
             }
         }
         motor0.setPower(0);

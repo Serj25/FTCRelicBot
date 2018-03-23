@@ -52,7 +52,8 @@ public class MainTeleOP extends LinearOpMode {
     private double armInfLimit = -3250;
     private double armSupLimit = 0;
     private double jointPos = 0;
-    private double jointPos0 = 0;
+    private boolean toggleSpeed = false;
+    private boolean toggleBrake = false;
 
     @Override
     public void runOpMode() {
@@ -103,11 +104,11 @@ public class MainTeleOP extends LinearOpMode {
             double sasiuPowerX = (gamepad1.left_stick_x / 1.5) / speedDevider;
             double rotPower = 0.7;
 
-            if(gamepad1.a) setBehaviour("Break");
-            else if (gamepad1.b) setBehaviour("Float");
+            if(gamepad1.b && toggleBrake) {setBehaviour("Break");toggleBrake = false;sleep(100);}
+            else if (gamepad1.b && !toggleBrake) {setBehaviour("Float");toggleBrake = true;sleep(100);}
 
-            if(gamepad1.x) {speedDevider = 2.75; rotPower = 0.005;} //SlowMode ON
-            else if(gamepad1.y) { speedDevider = 1.3; rotPower = 0.7;} //SlowMode OFF
+            if(gamepad1.a && toggleSpeed) {speedDevider = 2.75; rotPower = 0.005;toggleSpeed = false;sleep(100);} //SlowMode ON
+            else if(gamepad1.a && !toggleSpeed) { speedDevider = 1; rotPower = 0.7;toggleSpeed = true;sleep(100);} //SlowMode OFF
 
             if(gamepad1.left_stick_y == 0) {
                 motor0.setPower(0);
@@ -130,16 +131,32 @@ public class MainTeleOP extends LinearOpMode {
             }
 
             if(gamepad1.left_bumper) {
-                motor0.setPower(rotPower);
-                motor1.setPower(rotPower);
-                motor2.setPower(rotPower);
-                motor3.setPower(rotPower);
+                if(speedDevider == 1)   ///if SlowMode OFF
+                {
+                    motor0.setPower(rotPower);
+                    motor1.setPower(rotPower);
+                    motor2.setPower(rotPower);
+                    motor3.setPower(rotPower);
+                }
+                else   //if SlowMode ON
+                {
+                    motor0.setPower(rotPower);
+                    motor2.setPower(rotPower);
+                }
             }
             if(gamepad1.right_bumper) {
-                motor0.setPower(-rotPower);
-                motor1.setPower(-rotPower);
-                motor2.setPower(-rotPower);
-                motor3.setPower(-rotPower);
+                if(speedDevider == 1)      ///if SlowMode OFF
+                {
+                    motor0.setPower(-rotPower);
+                    motor1.setPower(-rotPower);
+                    motor2.setPower(-rotPower);
+                    motor3.setPower(-rotPower);
+                }
+                else    //if SlowMode ON
+                {
+                     motor0.setPower(-rotPower);
+                     motor2.setPower(-rotPower);
+                }
             }
 
             //SLIDER  && slider.getCurrentPosition() < sliderSupLimit && slider.getCurrentPosition() > sliderInfLimit
